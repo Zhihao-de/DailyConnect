@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ac.iscas.dao.EventsMapper">
+    <resultMap id="BaseResultMap" type="cn.ac.iscas.entity.Events">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="categories" property="categories" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="event_name" property="eventName" jdbcType="VARCHAR"/>
+        <result column="event_content" property="eventContent" jdbcType="VARCHAR"/>
+        <result column="start_time" property="startTime" jdbcType="DATE"/>
+        <result column="end_time" property="endTime" jdbcType="DATE"/>
+        <result column="teacher" property="teacher" jdbcType="INTEGER"/>
+        <result column="frequency" property="frequency" jdbcType="INTEGER"/>
+        <result column="share_type" property="shareType" jdbcType="INTEGER"/>
+        <result column="share_tag" property="shareTag" jdbcType="VARCHAR"/>
+        <result column="share_individuals" property="shareIndividuals" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, categories, create_time, event_name, event_content, start_time, end_time, teacher,
+    frequency, share_type, share_tag, share_individuals
+  </sql>
+
+
+    <select id="selectEventById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from events
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <insert id="addEvent" parameterType="cn.ac.iscas.entity.Events">
+        insert into events
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="categories != null">
+                categories,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="eventName != null">
+                event_name,
+            </if>
+            <if test="eventContent != null">
+                event_content,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="teacher != null">
+                teacher,
+            </if>
+            <if test="frequency != null">
+                frequency,
+            </if>
+            <if test="shareType != null">
+                share_type,
+            </if>
+            <if test="shareTag != null">
+                share_tag,
+            </if>
+            <if test="shareIndividuals != null">
+                share_individuals,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="categories != null">
+                #{categories,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="eventName != null">
+                #{eventName,jdbcType=VARCHAR},
+            </if>
+            <if test="eventContent != null">
+                #{eventContent,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=DATE},
+            </if>
+            <if test="teacher != null">
+                #{teacher,jdbcType=INTEGER},
+            </if>
+            <if test="frequency != null">
+                #{frequency,jdbcType=INTEGER},
+            </if>
+            <if test="shareType != null">
+                #{shareType,jdbcType=INTEGER},
+            </if>
+            <if test="shareTag != null">
+                #{shareTag,jdbcType=VARCHAR},
+            </if>
+            <if test="shareIndividuals != null">
+                #{shareIndividuals,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateEventById" parameterType="cn.ac.iscas.entity.Events">
+        update events
+        <set>
+            <if test="categories != null">
+                categories = #{categories,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="eventName != null">
+                event_name = #{eventName,jdbcType=VARCHAR},
+            </if>
+            <if test="eventContent != null">
+                event_content = #{eventContent,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="teacher != null">
+                teacher = #{teacher,jdbcType=INTEGER},
+            </if>
+            <if test="frequency != null">
+                frequency = #{frequency,jdbcType=INTEGER},
+            </if>
+            <if test="shareType != null">
+                share_type = #{shareType,jdbcType=INTEGER},
+            </if>
+            <if test="shareTag != null">
+                share_tag = #{shareTag,jdbcType=VARCHAR},
+            </if>
+            <if test="shareIndividuals != null">
+                share_individuals = #{shareIndividuals,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="selectEventsByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from events
+        where teacher = #{teacher,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteEventById" parameterType="java.lang.Integer">
+    delete from events
+    where id = #{id,jdbcType=INTEGER}
+   </delete>
+
+
+</mapper>

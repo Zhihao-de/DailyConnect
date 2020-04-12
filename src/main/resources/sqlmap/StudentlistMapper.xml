@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ac.iscas.dao.StudentlistMapper">
+    <resultMap id="BaseResultMap" type="cn.ac.iscas.entity.Studentlist">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="tag" property="tag" jdbcType="VARCHAR"/>
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR"/>
+        <result column="student_name" property="studentName" jdbcType="VARCHAR"/>
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, teacher_id, parent_id, tag, teacher_name, student_name, parent_name
+  </sql>
+
+
+    <select id="selectStudentsByTeacherId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from studentList
+        where teacher_id = #{teacherId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectTeacherByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from studentList
+        where parent_id = #{parentId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from studentList
+        where parent_id = #{parentId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByTeacherIdAndStudentName" parameterType="cn.ac.iscas.entity.Studentlist"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from studentList
+        where teacher_id = #{teacherId,jdbcType=INTEGER}
+        and student_name = #{studentName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByStudentName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from studentList
+        student_name = #{studentName,jdbcType=VARCHAR}
+    </select>
+
+
+    <insert id="addTeaStuShip" parameterType="cn.ac.iscas.entity.Studentlist">
+        insert into studentList
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="teacherId != null">
+                teacher_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="teacherName != null">
+                teacher_name,
+            </if>
+            <if test="studentName != null">
+                student_name,
+            </if>
+            <if test="parentName != null">
+                parent_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="studentName != null">
+                #{studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentName != null">
+                #{parentName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="cn.ac.iscas.entity.Studentlist">
+        update studentList
+        <set>
+            <if test="teacherId != null">
+                teacher_id = #{teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                teacher_name = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="studentName != null">
+                student_name = #{studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentName != null">
+                parent_name = #{parentName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateTagByTeacherIdAndStudentName" parameterType="cn.ac.iscas.entity.Studentlist">
+        update studentList
+        set tag = #{tag,jdbcType=VARCHAR}
+        where teacher_id = #{teacherId,jdbcType=INTEGER}
+        and  student_name = #{studentName,jdbcType=VARCHAR}
+   </update>
+
+    <select id="selectStudentsByTag" parameterType="java.lang.String" resultMap="BaseResultMap">
+    update studentList
+    set teacher_id = #{teacherId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      student_name = #{studentName,jdbcType=VARCHAR},
+      parent_name = #{parentName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+</mapper>
