@@ -1,36 +1,36 @@
 package cn.ac.iscas.service.relation;
 
-import cn.ac.iscas.dao.StudentlistMapper;
-import cn.ac.iscas.entity.Studentlist;
+import cn.ac.iscas.dao.GroupMapper;
+import cn.ac.iscas.entity.Group;
 import cn.ac.iscas.error.ErrCodes;
 import cn.ac.iscas.service.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class StudentTagUpdateService {
 
     @Autowired
-    private StudentlistMapper stuMapper;
+    private GroupMapper gMapper;
 
     /**
-     * 更新一系列某个老师管理下的学生的
-     * 学生的所有tag 均存储在一个字段下 通过“%”分割
+     * 更新一系列某个老师管理下的学生的tag
+     * 直接在group中增加一条记录
      *
      * @param teacherId studentName tag
      * @return ok或<code>ErrCodes.EMPTY_RESULT_SET</code>或<code>ErrCodes.SERVICE_UNEXPECTED_ERROR</code>
      */
-    public ResponseResult updateStudentTag(int teacherId, int[] parentId, int tagId) {
+    public ResponseResult updateStudentTag(int teacherId, int[] userId, int tagId) {
         try {
 
-            for (int pid : parentId) {
-                Studentlist sl = new Studentlist();
-                Studentlist sl_info = stuMapper.selectByParentId(pid);
-                //get the tag from the record
-                String new_tag = sl_info.getTag() + "%" + tagId;
-                //set new tag for the record
-                sl_info.setTag(new_tag);
-                stuMapper.updateTagByTeacherIdAndStudentName(sl_info);
+            for (int pid : userId) {
+                Group newGroup = new Group();
+                newGroup.setTagId(tagId);
+                newGroup.setTeacherId(teacherId);
+                newGroup.setStudentId(pid);
+                gMapper.addGroup(newGroup);
+
             }
 
             return ResponseResult.ok();

@@ -42,7 +42,7 @@ public class TestTagRetrievalService extends TestBase {
 
     @Test
     public void testTagReterievalService3() {
-        ResponseResult rr = trs.getTagInfo(3);
+        ResponseResult rr = trs.getTagInfo(29);
         System.out.println(rr.getCode());
         System.out.println(rr.getMsg());
         System.out.println(rr.getData());

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Min;
 
 @RestController
-@RequestMapping(value = "/stlist")
+@RequestMapping(value = "/students")
 @Validated
 
 public class StudentlistController extends ControllerBase {
@@ -44,14 +44,5 @@ public class StudentlistController extends ControllerBase {
     ) {
         return tsrrs.selectStudentsByTeacherId(teacherId);
     }
-
-    @RequestMapping(value = "/tsr/parent/{pid}", method = RequestMethod.GET)
-    //query teacher by parent Id
-    public ResponseResult queryTeacherByParentId(
-            @PathVariable("pid") @Min(value = 1, message = "invalid_parent_userId") int parentId
-    ) {
-        return tsrrs.selectTeacherByParentId(parentId);
-    }
-
 
 }

@@ -27,6 +27,7 @@ public class EventRetrievalServiceTest extends TestBase {
 
 
     @Test
+    //根据event ID来查看课程
     public void testGetEvent() {
 
         ResponseResult rr = ers.get(1);
@@ -35,4 +36,18 @@ public class EventRetrievalServiceTest extends TestBase {
         System.out.println(rr.getData());
 
     }
+
+    @Test
+    //根据老师的ID来查看课程
+    public void testGetEventsByTeacher() {
+
+        ResponseResult rr = ers.getByTeacherId(1);
+        System.out.println(rr.getCode());
+        System.out.println(rr.getMsg());
+        System.out.println(rr.getData());
+
+    }
+
+
+
 }

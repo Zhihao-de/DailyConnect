@@ -1,7 +1,6 @@
 package cn.ac.iscas.service.tag;
 
 import cn.ac.iscas.dao.GroupMapper;
-import cn.ac.iscas.dao.StudentlistMapper;
 import cn.ac.iscas.dao.TagMapper;
 import cn.ac.iscas.entity.Group;
 import cn.ac.iscas.entity.Tag;
@@ -9,7 +8,6 @@ import cn.ac.iscas.error.ErrCodes;
 import cn.ac.iscas.service.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class TagRetrievalService {
@@ -73,10 +71,6 @@ public class TagRetrievalService {
 
     @Autowired
     private GroupMapper groupMapper;
-
-    @Autowired
-    private StudentlistMapper studentlistMapper;
-
 
     public ResponseResult getTagInfo(int id) {
         try {

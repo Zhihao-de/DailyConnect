@@ -30,9 +30,12 @@ public class EventController extends ControllerBase {
     // create an event
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseResult create(
-            @RequestBody Events event
+            @RequestBody Events event,
+            @RequestParam int shareType,
+            @RequestParam(value = "tags") int[] tags,
+            @RequestParam(value = "objects") int[] objects
     ) {
-        return ecs.create(event);
+        return ecs.create(event, shareType, tags, objects);
     }
 
 

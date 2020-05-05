@@ -89,15 +89,6 @@ public class UserMapperTest {
 
     }
 
-    @Test
-    //test user sign in
-    public void testSignIn() {
-        User user = new User();
-        user.setTelephone("18310881111");
-        user.setPassword("password");
-        User u = mapper.selectUserByPass(user);
-        System.out.println(u.getId() + ":" + u.getTelephone());
-    }
 
     @Test
     //test user sign up

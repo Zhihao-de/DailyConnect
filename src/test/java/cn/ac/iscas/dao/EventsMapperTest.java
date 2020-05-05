@@ -1,15 +1,10 @@
 package cn.ac.iscas.dao;
 
-import cn.ac.iscas.entity.Events;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class EventsMapperTest {
 
@@ -31,7 +26,7 @@ public class EventsMapperTest {
     @After
     public void tearDown() throws Exception {
     }
-
+/*
     @Test
     public void addEvent() {
         Events ev = new Events();
@@ -46,7 +41,6 @@ public class EventsMapperTest {
         ev.setCreateTime(c.getTime());
         int res = mapper.addEvent(ev);
     }
-
     @Test
     public void getEventlist() {
         Events[] evs = mapper.selectEventsByTeacherId(1);
@@ -54,8 +48,8 @@ public class EventsMapperTest {
             System.out.println(ev.getId());
         }
     }
-
-    @Test
+*/
+/*    @Test
     public void getEventById() {
         Events ev = mapper.selectEventById(1);
         System.out.println(ev.getId());
@@ -64,8 +58,8 @@ public class EventsMapperTest {
         System.out.println(ev.getEventName());
         System.out.println(ev.getCreateTime());
     }
-
-    @Test
+*/
+  /*  @Test
     public void selectEventByTeahcerId() {
         Events[] evs = mapper.selectEventsByTeacherId(1);
         for (Events ev : evs) {
@@ -84,4 +78,6 @@ public class EventsMapperTest {
 
         int res = mapper.updateEventById(ev);
     }
+    */
+
 }

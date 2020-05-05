@@ -8,6 +8,7 @@ import cn.ac.iscas.service.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class TagDeleteService {
 
@@ -42,26 +43,26 @@ public class TagDeleteService {
 
     /**
      * 16  编辑标签页——更新
+     *
+     * 这个要改
      * 次删除一个列表中的某个学生
      *
      * @param id 为 该条group记录的id
      * @return ok或<code>ErrCodes.EMPTY_RESULT_SET</code>或<code>ErrCodes.SERVICE_UNEXPECTED_ERROR</code>
      */
-    public ResponseResult updateMember(int id, int teacherId, int[] parentIds) {
+    public ResponseResult updateMember(int id, int teacherId, int[] userIds) {
         try {
             assert 0 < id;
             assert 0 < teacherId;
-            assert 0 < parentIds.length;
+            assert 0 < userIds.length;
 
             //删除该tag下的所有学生的信息 并获取 parentId
             groupMapper.deleteByTagId(id);
             //重新新增user的tag信息
-            for (int pid : parentIds) {
+            for (int userId : userIds) {
                 Group g = new Group();
 
             }
-
-
             return ResponseResult.ok();
         } catch (Exception ex) {
             ex.printStackTrace();

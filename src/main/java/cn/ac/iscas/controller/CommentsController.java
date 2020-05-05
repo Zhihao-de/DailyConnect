@@ -20,10 +20,9 @@ public class CommentsController extends ControllerBase {
     @Autowired
     private CommentCreateService ccs;
 
-
     /**
      * 9
-     * 提交新的品论
+     * 提交新的评论
      * para comments
      * return ok
      */
@@ -50,7 +49,7 @@ public class CommentsController extends ControllerBase {
 
     /**
      * 7
-     * 事件的评论区
+     * 作业的评论区 titleId是作业的Id
      * para titleID
      * return comments info
      */

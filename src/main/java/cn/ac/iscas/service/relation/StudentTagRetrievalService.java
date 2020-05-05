@@ -1,8 +1,8 @@
 package cn.ac.iscas.service.relation;
 
-import cn.ac.iscas.dao.StudentlistMapper;
+import cn.ac.iscas.dao.GroupMapper;
 import cn.ac.iscas.dao.TagMapper;
-import cn.ac.iscas.entity.Studentlist;
+import cn.ac.iscas.entity.Group;
 import cn.ac.iscas.entity.Tag;
 import cn.ac.iscas.error.ErrCodes;
 import cn.ac.iscas.service.ResponseResult;
@@ -13,30 +13,31 @@ import org.springframework.stereotype.Service;
 public class StudentTagRetrievalService {
 
     @Autowired
-    private StudentlistMapper stuMapper;
+    private GroupMapper groupMapper;
     @Autowired
     private TagMapper tagMapper;
 
     /**
-     * 查找学生所有的tags
+     * 老师查找学生所有的tags
      *
-     * @param parentId studentName tag
+     * @param studentId
      * @return ok或<code>ErrCodes.EMPTY_RESULT_SET</code>或<code>ErrCodes.SERVICE_UNEXPECTED_ERROR</code>
      */
-    public ResponseResult RetrievalStudentTag(Integer parentId) {
+    public ResponseResult RetrievalStudentTag(Integer studentId) {
         try {
 
-            Studentlist sl = stuMapper.selectByParentId(parentId);
-            String tag_info = sl.getTag();
-            //所有tag ID 的字符串
-            String[] tags_ids = tag_info.split("%");
-
-            Tag[] tag_list = new Tag[tags_ids.length];
-            for (int i = 0; i < tags_ids.length; i++) {
-                //convert id of string into integer
-                tag_list[i] = tagMapper.selectTagById(Integer.valueOf(tags_ids[i]));
-
+            Group[] groups = groupMapper.selectByStudent(studentId);
+            Tag[] tag_list;
+            if (groups != null && groups.length != 0) {
+                tag_list = new Tag[groups.length];
+                for (int i = 0; i < groups.length; i++) {
+                    Tag term = tagMapper.selectTagById(groups[i].getTagId());
+                    tag_list[i] = term;
+                }
+            } else {
+                return ResponseResult.error(ErrCodes.EMPTY_RESULT_SET, "non-existing tags");
             }
+
             //返回所有tag信息
             return ResponseResult.ok().put("tags", tag_list);
         } catch (Exception ex) {

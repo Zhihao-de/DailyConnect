@@ -25,8 +25,8 @@ public class TestTagCreateService extends TestBase {
 
     @Test
     public void testTagCreateService() {
-        int[] parent = {1001, 1002, 1004};
-        ResponseResult rr = tcs.CreateGroup(1, "fsdjfn", parent);
+        int[] students = {333, 888, 999};
+        ResponseResult rr = tcs.CreateGroup(1, "心智不全", students);
         System.out.println(rr.getCode());
         System.out.println(rr.getMsg());
         System.out.println(rr.getData());

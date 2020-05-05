@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-
 @Service
 public class CommentCreateService {
 
@@ -33,7 +32,6 @@ public class CommentCreateService {
             assert null != content;
             assert null != commentTime;
 
-            //Events newEvent = new Events();
             Comments comment = new Comments();
             comment.setTid(tid);
             comment.setUid(uid);

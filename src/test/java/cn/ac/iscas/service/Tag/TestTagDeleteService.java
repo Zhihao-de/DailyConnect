@@ -25,7 +25,7 @@ public class TestTagDeleteService extends TestBase {
     @Test
     public void testTagDeleteService() {
 
-        tds.deleteTag(20);
+        tds.deleteTag(12);
     }
 
 }

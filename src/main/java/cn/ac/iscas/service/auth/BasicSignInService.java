@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Service
-
 public class BasicSignInService {
     @Autowired
     private UserMapper uMapper;
